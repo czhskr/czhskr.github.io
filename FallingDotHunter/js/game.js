@@ -23,8 +23,8 @@ let gameStarted = false;
 
 // 어시스트 설정 상수
 const ASSIST_WAIT_TIME = 8;        // 어시스트 대기 시간 (초)
-const ASSIST_ACTIVE_TIME = 5;       // 어시스트 활성화 시간 (초)
-const ASSIST_CLICK_INTERVAL = 1.0;  // 공을 없애는 주기 (초)
+const ASSIST_ACTIVE_TIME = 3;       // 어시스트 활성화 시간 (초)
+const ASSIST_CLICK_INTERVAL = 1.2;  // 공을 없애는 주기 (초)
 
 // 어시스트 변수
 let assistActive = false;
@@ -439,4 +439,5 @@ canvas.addEventListener('mouseenter', function() {
 
 canvas.addEventListener('mouseleave', function() {
     isMouseInCanvas = false;
+
 });
