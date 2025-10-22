@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Falling Dot Hunter</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<canvas id="gameCanvas" width="400" height="600"></canvas>
+<div id="gameInfo">
+  <div id="lifeDisplay">
+    <img id="lifeImage" src="css/life3.png" alt="Life">
+  </div>
+  <div id="scoreDisplay">Score: <span id="score">0</span></div>
+</div>
+
+<!-- 게임 스타트 버튼 -->
+<button id="startButton">GAME START</button>
+
+<!-- 어시스트 체크박스 -->
+<div id="assistCheckboxContainer">
+  <label>
+    <input type="checkbox" id="assistCheckbox"> ASSIST
+  </label>
+</div>
+
+<!-- 게임 재시작 버튼 -->
+<button id="restartButton" style="display: none;">RESTART</button>
+
+<!-- 어시스트 상태 표시 -->
+<div id="assistStatus" style="display: none;">WAITING...</div>
+
+<script src="js/game.js"></script>
+
+</body>
+</html>

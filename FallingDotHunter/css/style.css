@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root {
+  --life3-image: url('css/life3.png');
+  --life2-image: url('css/life2.png');
+  --life1-image: url('css/life1.png');
+  --life-image-width: 120px;
+  --life-image-height: 30px;
+  --image-url: url('css/meteor.png');
+  --gameover-bg: url('css/gameover.png');
+}
+
+* {
+  font-family: 'Press Start 2P', monospace;
+}
+
+body {
+  font-family: 'Press Start 2P', monospace;
+  color: #ffffff;
+  margin: 0;
+  padding: 20px;
+  position: relative;
+  background-color: #222;
+}
+
+canvas {
+  border: 5px solid #333;
+  display: block;
+  margin: 20px auto;
+  background-image: url('bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: crosshair;
+  transition: border-color 0.3s ease;
+  position: relative;
+}
+
+canvas.game-paused {
+  background-color: #666;
+  background-blend-mode: multiply;
+}
+
+canvas.assist-active {
+  border-color: #ff0000;
+}
+
+#gameInfo {
+  text-align: center;
+  margin: 10px auto;
+  width: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#lifeDisplay {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+#lifeImage {
+  display: block;
+  width: var(--life-image-width);
+  height: var(--life-image-height);
+}
+
+#scoreDisplay {
+  display: inline-block;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  vertical-align: middle;
+}
+
+/* 게임 스타트 버튼 스타일 */
+#startButton {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  color: #000;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 14px;
+  transition: background-color 0.3s;
+  z-index: 1000;
+}
+
+#startButton:hover {
+  background-color: #09e109;
+}
+
+#startButton:disabled {
+  background-color: #666;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* 어시스트 체크박스 컨테이너 */
+#assistCheckboxContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  margin-top: 60px;
+}
+
+#assistCheckboxContainer label {
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#assistCheckboxContainer input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+#assistCheckboxContainer input[type="checkbox"]:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* 게임 재시작 버튼 스타일 */
+#restartButton {
+  display: block;
+  margin: 20px auto;
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 12px;
+  transition: background-color 0.3s;
+}
+
+#restartButton:hover {
+  background-color: #ff6666;
+}
+
+/* 어시스트 상태 표시 */
+#assistStatus {
+  text-align: center;
+  margin: 10px auto;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #00ff00;
+  border-radius: 5px;
+  font-size: 10px;
+  width: 300px;
+}
