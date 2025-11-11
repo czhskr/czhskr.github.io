@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galaxy Defender</title>
+
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+
+  <body>
+    <!-- 로딩 화면 -->
+    <div id="loadingScreen">
+      <div id="loadingText">LOADING...</div>
+    </div>
+
+    <!-- 타이틀 화면 -->
+    <div id="titleScreen">
+      <div id="titleContent">
+        <h1 id="gameTitle">GALAXY<br>DEFENDER</h1>
+        <div id="buttonContainer">
+          <div id="mainButtons">
+            <button id="startBtn">START</button>
+            <button id="upgradeBtn">UPGRADE</button>
+            <button id="soundBtn">SOUND</button>
+          </div>
+          <div id="subButtons">
+            <button id="tutorialBtn">TUTORIAL</button>
+            <button id="saveBtn">SAVE</button>
+          </div>
+        </div>
+        <div id="soundPanel" style="display: none;">
+          <div>BGM: <input type="range" id="bgmVolume" min="0" max="100" value="30"></div>
+          <div>SFX: <input type="range" id="sfxVolume" min="0" max="100" value="50"></div>
+          <button id="closeSoundBtn">CLOSE</button>
+        </div>
+        <div id="savePanel" style="display: none;">
+          <div id="saveInfo">save: <span id="saveDate">none</span></div>
+          <div id="saveItems"></div>
+          <div id="saveConfirmText" style="display: none;">저장 데이터를 초기화 하시겠습니까?</div>
+          <div id="savePanelButtons" style="display: flex; gap: 10px;">
+            <button id="savePanelSaveBtn">SAVE</button>
+            <button id="resetBtn">RESET</button>
+          </div>
+          <button id="closeSavePanelBtn">CLOSE</button>
+        </div>
+        <div id="tutorialPanel" style="display: none;">
+          <div id="tutorialContainer">
+            <div id="tutorialList">
+              <!-- 튜토리얼 항목 목록이 여기에 동적으로 생성됩니다 -->
+            </div>
+            <div id="tutorialContent">
+              <div id="tutorialTitle"></div>
+              <div id="tutorialDescription"></div>
+            </div>
+          </div>
+          <button id="closeTutorialBtn">CLOSE</button>
+        </div>
+        <audio id="titleBgm" src="audio/title.mp3" preload="auto" loop></audio>
+      </div>
+    </div>
+
+    <!-- 스테이지 선택 화면 -->
+    <div id="stageSelectScreen" style="display: none;">
+      <div id="stageSelectContent">
+        <h2 id="stageSelectTitle">STAGE SELECT</h2>
+        <div id="stageContainer">
+          <button class="stageBtn" id="stage1Btn" data-stage="1">STAGE 1</button>
+          <button class="stageBtn" id="stage2Btn" data-stage="2" disabled>STAGE 2<br><span class="lockText">LOCKED</span></button>
+          <button class="stageBtn" id="stage3Btn" data-stage="3" disabled>STAGE 3<br><span class="lockText">LOCKED</span></button>
+          <button class="stageBtn" id="infiniteBtn" disabled>INFINITE<br><span class="lockText">LOCKED</span></button>
+          <button class="stageBtn" id="extremeBtn" disabled>EXTREME<br><span class="lockText">LOCKED</span></button>
+        </div>
+        <button id="backToTitleBtn2">BACK</button>
+      </div>
+    </div>
+
+    <!-- 업그레이드 화면 -->
+    <div id="upgradeScreen" style="display: none;">
+      <div id="upgradeContent">
+        <h2 id="upgradeTitle">UPGRADE</h2>
+        <div id="upgradeGold">GOLD: <span id="upgradeGoldValue">0</span>g</div>
+        <div id="upgradeItems">
+          <!-- 상점 카테고리는 JavaScript에서 동적으로 생성됩니다 -->
+        </div>
+          <button id="upgradeBackBtn">BACK</button>
+        </div>
+      </div>
+
+    <!-- 게임 화면 -->
+    <div id="gameScreen">
+      <div id="gameContainer">
+        <div id="gameUI">
+          <div id="lifeDisplay">
+            <div>Life:</div>
+            <div id="lifeGaugeBar">
+              <div id="lifeGaugeCells"></div>
+            </div>
+          </div>
+          <div id="goldDisplay">Gold: <span id="goldValue">0</span></div>
+          <div id="stageDisplay">Stage: <span id="stageValue">1</span></div>
+        </div>
+        <div id="canvasWrapper">
+          <button id="menuBtn">☰</button>
+          <canvas id="gameCanvas" width="400" height="600"></canvas>
+          <div id="gaugeDisplay" style="display: none;">
+            <div id="gaugeContainer">
+              <div id="gaugeBar">
+                <div id="gaugeFill"></div>
+                <div id="gaugeCells"></div>
+              </div>
+              <div id="gaugeText">
+                <span id="gaugeValue">0</span><span id="gaugeSeparator"> / </span><span id="gaugeMax">0</span>
+              </div>
+            </div>
+          </div>
+          <div id="flashEffect"></div>
+        </div>
+        <audio id="gameBgm" src="audio/gamebg.mp3" preload="auto" loop></audio>
+      </div>
+      <div id="pauseMenu" style="display: none;">
+        <div id="pauseOverlay"></div>
+        <div id="pauseContent">
+          <h2>PAUSED</h2>
+          <button id="resumeBtn">RESUME</button>
+          <button id="pauseSoundBtn">SOUND</button>
+          <button id="backToTitleBtn">TITLE</button>
+          <div id="pauseSoundPanel" style="display: none;">
+            <div>BGM: <input type="range" id="pauseBgmVolume" min="0" max="100" value="30"></div>
+            <div>SFX: <input type="range" id="pauseSfxVolume" min="0" max="100" value="50"></div>
+            <button id="pauseCloseSoundBtn">CLOSE</button>
+          </div>
+        </div>
+      </div>
+      <div id="gameResultMenu" style="display: none;">
+        <div id="gameResultOverlay"></div>
+        <div id="gameResultContent">
+          <h2 id="gameResultTitle">GAME OVER</h2>
+          <div id="gameResultDetails">
+            <div>처치 보수: <span id="gameResultKillReward">0</span>g</div>
+            <div>클리어 보수: <span id="gameResultClearReward">0</span>g</div>
+            <div>합계: <span id="gameResultTotalReward">0</span>g</div>
+          </div>
+          <button id="gameResultTitleBtn">TITLE</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/space_shooter(2).js"></script>
+  </body>
+</html>

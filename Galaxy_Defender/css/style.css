@@ -1,0 +1,1104 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root {
+    /* 시작 화면 스타일 */
+    text-shadow:
+        0 4px 0 rgba(0,0,0,0.85),
+        0 0 10px rgba(0,0,0,0.55),
+        0 0 20px rgba(0,0,0,0.45);
+    text-align: center;
+}
+
+* { font-family: 'Press Start 2P', monospace; }
+
+/* 화면 전환 */
+#loadingScreen, #titleScreen, #gameScreen, #stageSelectScreen, #upgradeScreen {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 로딩 화면 */
+#loadingScreen {
+    background: #000;
+    z-index: 100;
+}
+
+#loadingText {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* 타이틀 화면 */
+#titleScreen {
+    background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), 
+                url('../images/title.png') center/cover no-repeat;
+    display: none; /* 초기 비표시 */
+}
+
+#titleContent {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+#buttonContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+}
+
+#mainButtons {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+#subButtons {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+#gameTitle {
+    color: red;
+    font-weight: bold;
+    font-size: 58px;
+    margin: 0;
+}
+
+#startBtn, #upgradeBtn, #tutorialBtn, #soundBtn, #saveBtn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    color: black;
+    text-shadow:
+        0 4px 0 white,
+        0 0 10px white,
+        0 0 20px white;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+#startBtn:hover, #upgradeBtn:hover, #tutorialBtn:hover, #soundBtn:hover, #saveBtn:hover {
+    transform: scale(1.05);
+}
+
+#startBtn:active, #upgradeBtn:active, #tutorialBtn:active, #soundBtn:active, #saveBtn:active {
+    transform: scale(0.95);
+}
+
+#soundPanel, #savePanel {
+    position: absolute;
+    top: 150%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    color: white;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    z-index: 10;
+}
+
+#tutorialPanel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    color: white;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    z-index: 10;
+    width: 850px;
+    height: 500px;
+    box-sizing: border-box;
+}
+
+#tutorialContainer {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    flex: 1;
+    overflow: hidden;
+}
+
+#tutorialList {
+    width: 200px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    padding-right: 10px;
+    box-sizing: border-box;
+}
+
+.tutorialItem {
+    padding: 12px 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+.tutorialItem:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: scale(1.02);
+}
+
+.tutorialItem.active {
+    background: rgba(255, 255, 0, 0.2);
+    border-color: rgba(255, 255, 0, 0.8);
+}
+
+#tutorialContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    overflow-y: auto;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+#tutorialTitle {
+    font-size: 18px;
+    font-weight: bold;
+    color: rgba(255, 255, 0, 0.9);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 10px;
+}
+
+#tutorialDescription {
+    font-size: 14px;
+    line-height: 1.6;
+    white-space: pre-line;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+#closeTutorialBtn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    color: white;
+    text-shadow:
+        0 2px 0 rgba(0, 0, 0, 0.8),
+        0 0 10px rgba(0, 0, 0, 0.5);
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+#closeTutorialBtn:hover {
+    transform: scale(1.05);
+}
+
+#closeTutorialBtn:active {
+    transform: scale(0.95);
+}
+
+#soundPanel div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#soundPanel input[type="range"] {
+    width: 150px;
+    cursor: pointer;
+}
+
+#closeSoundBtn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    color: black;
+    text-shadow:
+        0 4px 0 white,
+        0 0 10px white,
+        0 0 20px white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.1s;
+    margin-top: 10px;
+}
+
+#closeSoundBtn:hover {
+    transform: scale(1.05);
+}
+
+#closeSoundBtn:active {
+    transform: scale(0.95);
+}
+
+#savePanel {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    min-width: 300px;
+    padding: 25px;
+}
+
+#saveInfo {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+}
+
+#saveDate {
+    color: #ffd700;
+}
+
+#saveItems {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    line-height: 1.6;
+}
+
+#saveConfirmText {
+    color: #ff4444;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#savePanelButtons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#savePanelSaveBtn, #resetBtn, #closeSavePanelBtn {
+    padding: 8px 16px;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background 0.2s;
+    border: 1px solid;
+}
+
+#savePanelSaveBtn {
+    background: rgba(0, 150, 0, 0.3);
+    border-color: #4CAF50;
+}
+
+#savePanelSaveBtn:hover {
+    background: rgba(0, 150, 0, 0.5);
+}
+
+#resetBtn {
+    background: rgba(255, 0, 0, 0.3);
+    border-color: #ff4444;
+}
+
+#resetBtn:hover {
+    background: rgba(255, 0, 0, 0.5);
+}
+
+#closeSavePanelBtn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    color: black;
+    text-shadow:
+        0 4px 0 white,
+        0 0 10px white,
+        0 0 20px white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.1s;
+    margin-top: 10px;
+}
+
+#closeSavePanelBtn:hover {
+    transform: scale(1.05);
+}
+
+#closeSavePanelBtn:active {
+    transform: scale(0.95);
+}
+
+#savePanel.shake {
+    animation: savePanelShake 0.5s;
+}
+
+@keyframes savePanelShake {
+    0%, 100% { transform: translate(-50%, -50%) translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translate(-50%, -50%) translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translate(-50%, -50%) translateX(5px); }
+}
+
+/* 스테이지 선택 화면 */
+#stageSelectScreen {
+    background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), 
+                url('../images/title.png') center/cover no-repeat;
+    display: none; /* 초기 비표시 */
+}
+
+#stageSelectContent {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+#stageSelectTitle {
+    color: red;
+    font-weight: bold;
+    font-size: 32px;
+    margin: 0;
+}
+
+#stageContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.stageBtn {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.stageBtn:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+.stageBtn:active:not(:disabled) {
+    transform: scale(0.95);
+}
+
+.stageBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.lockText {
+    font-size: 12px;
+    color: #999;
+}
+
+#backToTitleBtn2 {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 30px;
+    cursor: pointer;
+    transition: background 0.2s;
+    width: 200px;
+}
+
+#backToTitleBtn2:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+#backToTitleBtn2:active {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* 게임 화면 */
+#gameScreen {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+    display: none; /* 초기 비표시 */
+}
+
+#gameContainer {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* 게임 UI */
+#gameUI {
+    position: absolute;
+    left: calc(50% + 220px);  /* 캔버스 너비(400px) / 2 + 여유 공간 = 200px + 20px */
+    top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    min-width: 200px;
+    padding: 10px;
+    z-index: 10;
+    align-items: flex-start;
+}
+
+#lifeDisplay {
+    color: white;
+    font-size: 14px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#lifeGaugeBar {
+    display: flex;
+    gap: 2px;
+    padding: 2px;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+    height: 25px;
+}
+
+#lifeGaugeCells {
+    display: flex;
+    gap: 2px;
+    width: 100%;
+    height: 100%;
+}
+
+.lifeGaugeCell {
+    flex: 1;
+    background: rgba(100, 100, 100, 0.5);
+    border-radius: 2px;
+    min-width: 8px;
+}
+
+.lifeGaugeCell.filled {
+    background: linear-gradient(to bottom, #ff4444, #cc0000);
+    box-shadow: 0 0 5px rgba(255, 68, 68, 0.5);
+}
+
+#goldDisplay {
+    color: white;
+    font-size: 14px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    text-align: left;
+}
+
+#stageDisplay {
+    color: white;
+    font-size: 14px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    text-align: left;
+}
+
+/* 통합 게이지바 */
+#gaugeDisplay {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 15;
+    width: 300px;
+    transform-origin: center center;
+}
+
+#gaugeContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+}
+
+#gaugeBar {
+    width: 100%;
+    height: 25px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 2px solid white;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+#gaugeFill {
+    height: 100%;
+    background: linear-gradient(90deg, #00ff00, #00cc00);
+    width: 0%;
+    transition: width 0.3s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#gaugeCells {
+    display: flex;
+    gap: 2px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.gaugeCell {
+    flex: 1;
+    height: 100%;
+    background: rgba(50, 50, 50, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: background 0.2s ease;
+}
+
+.gaugeCell.filled {
+    background: linear-gradient(90deg, #ff0000, #cc0000);
+    border-color: #ff6666;
+}
+
+#gaugeText {
+    color: white;
+    font-size: 12px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    text-align: center;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 보스 모드 스타일 */
+#gaugeDisplay.boss {
+    top: 20px;
+}
+
+#gaugeDisplay.boss #gaugeBar {
+    border-color: #ff0000;
+    display: flex;
+    gap: 2px;
+    padding: 2px;
+}
+
+#gaugeDisplay.boss #gaugeFill {
+    background: linear-gradient(90deg, #ff0000, #cc0000);
+}
+
+#gaugeDisplay.boss #gaugeText {
+    color: #ff0000;
+    font-weight: bold;
+}
+
+#gaugeDisplay.boss .gaugeCell.filled {
+    background: linear-gradient(90deg, #ff0000, #cc0000);
+    border-color: #ff6666;
+}
+
+/* WARNING 모드 스타일 */
+#gaugeDisplay.warning {
+    animation: pulseGauge 0.5s infinite;
+    transform: translate(-50%, 0);
+    transform-origin: center center;
+}
+
+#gaugeDisplay.warning #gaugeBar {
+    border-color: red;
+    box-shadow: 0 0 10px red;
+    animation: pulseBar 0.5s infinite;
+}
+
+#gaugeDisplay.warning #gaugeFill {
+    background: linear-gradient(90deg, #ff0000, #cc0000);
+}
+
+#gaugeDisplay.warning #gaugeText {
+    color: red;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+@keyframes pulseGauge {
+    0%, 100% { transform: translate(-50%, 0) scale(1); }
+    50% { transform: translate(-50%, 0) scale(1.05); }
+}
+
+@keyframes pulseBar {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translate(0, 0); }
+    10% { transform: translate(-10px, -5px); }
+    20% { transform: translate(10px, 5px); }
+    30% { transform: translate(-10px, 5px); }
+    40% { transform: translate(10px, -5px); }
+    50% { transform: translate(-10px, -5px); }
+    60% { transform: translate(10px, 5px); }
+    70% { transform: translate(-10px, 5px); }
+    80% { transform: translate(10px, -5px); }
+    90% { transform: translate(-5px, 0); }
+}
+
+@keyframes flash {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+#gameScreen.shake {
+    animation: shake 0.5s infinite;
+}
+
+/* 업그레이드 화면 */
+#upgradeScreen {
+    background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), 
+                url('../images/store.png') center/cover no-repeat;
+    display: none;
+}
+
+#upgradeContent {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+#upgradeTitle {
+    color: red;
+    font-weight: bold;
+    font-size: 48px;
+    margin: 0;
+}
+
+#upgradeGold {
+    color: black;
+    text-shadow:
+        0 4px 0 white,
+        0 0 10px white,
+        0 0 20px white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#upgradeItems {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.upgradeCategory {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 15px;
+    border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    width: 280px;
+    min-height: 350px;
+    flex-shrink: 0;
+    justify-content: space-between;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    position: relative;
+    overflow: hidden;
+}
+
+.upgradeCategory:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+.upgradeCategory.upgradeFlash {
+    animation: upgradeGlow 1s ease-out;
+}
+
+@keyframes upgradeGlow {
+    0% {
+        box-shadow: 0 0 0 rgba(255, 255, 0, 0);
+        border-color: rgba(255, 255, 255, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(255, 255, 0, 0.8), 0 0 60px rgba(255, 255, 0, 0.4);
+        border-color: rgba(255, 255, 0, 1);
+    }
+    100% {
+        box-shadow: 0 0 0 rgba(255, 255, 0, 0);
+        border-color: rgba(255, 255, 255, 0.3);
+    }
+}
+
+
+.upgradeCategoryImage {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.upgradeCategoryTitle {
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.upgradeCategoryItems {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    flex: 1;
+}
+
+.upgradeItemLevel {
+    color: white;
+    font-size: 12px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 8px 15px;
+    border-radius: 5px;
+}
+
+.upgradeNextInfo {
+    color: rgba(255, 255, 0, 0.9);
+    font-size: 11px;
+    text-align: center;
+    padding: 5px 10px;
+    font-weight: bold;
+}
+
+.upgradeItemInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(0, 0, 0, 0.3);
+    padding: 8px 15px;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.upgradeItemInfo div {
+    padding: 2px 0;
+}
+
+.upgradeGoldInfo {
+    color: black;
+    text-shadow:
+        0 4px 0 white,
+        0 0 10px white,
+        0 0 20px white;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#upgradeBackBtn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    color: black;
+    text-shadow:
+        0 4px 0 white,
+        0 0 10px white,
+        0 0 20px white;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+#upgradeBackBtn:hover {
+    transform: scale(1.05);
+}
+
+#upgradeBackBtn:active {
+    transform: scale(0.95);
+}
+
+#flashEffect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 400px;
+    height: 600px;
+    background: white;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 25;
+}
+
+#flashEffect.active {
+    animation: flash 0.3s;
+}
+
+#canvasWrapper {
+    position: relative;
+    width: 400px;
+    height: 600px;
+}
+
+#gameCanvas {
+    background: black;
+    display: block;
+    border: 2px solid white;
+    width: 400px;
+    height: 600px;
+}
+
+#menuBtn {
+    position: absolute;
+    top: 19px;
+    left: 10px;
+    z-index: 20;
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid white;
+    color: white;
+    font-size: 20px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+#menuBtn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+#pauseMenu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 30;
+}
+
+#pauseOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+#pauseContent {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    z-index: 31;
+}
+
+#pauseContent h2 {
+    color: white;
+    font-size: 32px;
+    margin: 0;
+}
+
+#resumeBtn, #backToTitleBtn, #pauseSoundBtn {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 30px;
+    cursor: pointer;
+    transition: background 0.2s;
+    width: 200px;
+}
+
+#resumeBtn:hover, #backToTitleBtn:hover, #pauseSoundBtn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+#resumeBtn:active, #backToTitleBtn:active, #pauseSoundBtn:active {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* 일시정지 메뉴 사운드 패널 */
+#pauseSoundPanel {
+    position: absolute;
+    top: 150%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    color: white;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    z-index: 10;
+}
+
+#pauseSoundPanel div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#pauseSoundPanel input[type="range"] {
+    width: 150px;
+    cursor: pointer;
+}
+
+#pauseCloseSoundBtn {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+    padding: 5px 20px;
+}
+
+#pauseCloseSoundBtn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+#pauseCloseSoundBtn:active {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* 게임 결과 메뉴 (게임 오버/클리어 통합) */
+#gameResultMenu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 30;
+    opacity: 0;
+}
+
+#gameResultOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+#gameResultContent {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    z-index: 31;
+}
+
+#gameResultTitle {
+    font-size: 32px;
+    margin: 0;
+}
+
+#gameResultDetails {
+    color: white;
+    font-size: 18px;
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#gameResultDetails div {
+    margin: 0;
+}
+
+#gameResultTitleBtn {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 30px;
+    cursor: pointer;
+    transition: background 0.2s;
+    width: 200px;
+}
+
+#gameResultTitleBtn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+#gameResultTitleBtn:active {
+    background: rgba(255, 255, 255, 0.3);
+}
