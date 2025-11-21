@@ -1,0 +1,113 @@
+body {
+    background-color: #000;
+    margin: 0;
+    padding: 0;
+}
+
+canvas {
+    background-color: #eef;
+    display: block;
+    margin: 30px auto;
+    border: 1px solid #333;
+}
+
+#startScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.start-content {
+    text-align: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 40px;
+    border-radius: 10px;
+    border: 2px solid #4CAF50;
+}
+
+.start-content h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    color: #4CAF50;
+}
+
+.start-content p {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+#startButton {
+    margin-top: 30px;
+    padding: 15px 40px;
+    font-size: 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#startButton:hover {
+    background-color: #45a049;
+}
+
+#startButton:disabled {
+    background-color: #666;
+    cursor: not-allowed;
+}
+
+#startButton:disabled:hover {
+    background-color: #666;
+}
+
+#loadingText {
+    color: #4CAF50;
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+#gameOverScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#gameOverScreen .start-content {
+    border-color: #f44336;
+}
+
+#gameOverScreen .start-content h1 {
+    color: #f44336;
+}
+
+#restartButton {
+    margin-top: 30px;
+    padding: 15px 40px;
+    font-size: 20px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#restartButton:hover {
+    background-color: #da190b;
+}

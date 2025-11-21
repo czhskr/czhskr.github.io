@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Forest Runner</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="startScreen">
+    <div class="start-content">
+      <h1>Forest Runner</h1>
+      <h2>[DEMO]</h2>
+      <p>A, D: 이동</p>
+      <p>스페이스바: 점프</p>
+      <p>Shift: 대쉬</p>
+      <p>좌클릭: 공격</p>
+      <p id="loadingText">이미지 로딩 중...</p>
+      <button id="startButton" disabled>로딩 중...</button>
+    </div>
+  </div>
+  <div id="gameOverScreen" style="display: none;">
+    <div class="start-content">
+      <h1>Game Over</h1>
+      <p id="gameOverTime">생존 시간: 0초</p>
+      <button id="restartButton">다시 시작</button>
+    </div>
+  </div>
+  <canvas id="gameCanvas" width="1400" height="650"></canvas>
+  <script src="js/forest_runner.js"></script>
+</body>
+</html>
