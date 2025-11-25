@@ -8,20 +8,36 @@
   <div id="startScreen">
     <div class="start-content">
       <h1>Forest Runner</h1>
-      <h2>[DEMO]</h2>
-      <p>A, D: 이동</p>
-      <p>스페이스바: 점프</p>
-      <p>Shift: 대쉬</p>
-      <p>좌클릭: 공격</p>
+      <h2>[DEMO VERSION 0.1]</h2>
       <p id="loadingText">이미지 로딩 중...</p>
+      <button id="tutorialButton">튜토리얼</button>
       <button id="startButton" disabled>로딩 중...</button>
+    </div>
+  </div>
+  <div id="tutorialScreen" style="display: none;">
+    <div class="tutorial-content">
+      <div class="tutorial-sidebar">
+        <h2>목차</h2>
+        <div id="tutorialItems"></div>
+      </div>
+      <div class="tutorial-main">
+        <button class="tutorial-close">X</button>
+        <div id="tutorialDescription"></div>
+      </div>
     </div>
   </div>
   <div id="gameOverScreen" style="display: none;">
     <div class="start-content">
-      <h1>Game Over</h1>
+      <h1>HUNTED</h1>
       <p id="gameOverTime">생존 시간: 0초</p>
       <button id="restartButton">다시 시작</button>
+    </div>
+  </div>
+  <div id="gameClearScreen" style="display: none;">
+    <div class="start-content">
+      <h1>Game Clear!</h1>
+      <p id="gameClearTime">클리어 시간: 0초</p>
+      <button id="restartButton2">다시 시작</button>
     </div>
   </div>
   <canvas id="gameCanvas" width="1400" height="650"></canvas>

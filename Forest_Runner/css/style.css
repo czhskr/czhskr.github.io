@@ -1,3 +1,19 @@
+@font-face {
+    font-family: 'GameFont';
+    src: url('font/DOSMyungjo.ttf') format('truetype');
+    unicode-range: U+AC00-D7A3, U+1100-11FF, U+3130-318F, U+A960-A97F, U+D7B0-D7FF;
+}
+
+@font-face {
+    font-family: 'GameFont';
+    src: url('font/medieval-pixel.ttf') format('truetype');
+    unicode-range: U+0020-007F, U+00A0-00FF, U+0100-017F, U+0180-024F, U+1E00-1EFF;
+}
+
+* {
+    font-family: 'GameFont', sans-serif;
+}
+
 body {
     background-color: #000;
     margin: 0;
@@ -110,4 +126,172 @@ canvas {
 
 #restartButton:hover {
     background-color: #da190b;
+}
+
+#gameClearScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#gameClearScreen .start-content {
+    border-color: #4CAF50;
+}
+
+#gameClearScreen .start-content h1 {
+    color: #4CAF50;
+}
+
+#restartButton2 {
+    margin-top: 30px;
+    padding: 15px 40px;
+    font-size: 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#restartButton2:hover {
+    background-color: #45a049;
+}
+
+#tutorialButton {
+    margin-top: 20px;
+    margin-right: 10px;
+    padding: 15px 40px;
+    font-size: 20px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#tutorialButton:hover {
+    background-color: #0b7dda;
+}
+
+#tutorialScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.tutorial-content {
+    display: flex;
+    width: 90%;
+    max-width: 1200px;
+    height: 80%;
+    background-color: rgba(30, 30, 30, 0.95);
+    border-radius: 10px;
+    border: 2px solid #4CAF50;
+    overflow: hidden;
+}
+
+.tutorial-sidebar {
+    width: 250px;
+    background-color: rgba(20, 20, 20, 0.9);
+    padding: 20px;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.tutorial-sidebar::-webkit-scrollbar {
+    display: none;
+}
+
+.tutorial-sidebar h2 {
+    color: #4CAF50;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.tutorial-item {
+    padding: 15px;
+    margin: 5px 0;
+    background-color: rgba(40, 40, 40, 0.8);
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    transition: all 0.3s;
+    border: 1px solid transparent;
+}
+
+.tutorial-item:hover {
+    background-color: rgba(60, 60, 60, 0.9);
+    border-color: #4CAF50;
+}
+
+.tutorial-item.active {
+    background-color: rgba(76, 175, 80, 0.3);
+    border-color: #4CAF50;
+}
+
+.tutorial-main {
+    flex: 1;
+    padding: 40px;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    position: relative;
+}
+
+.tutorial-main::-webkit-scrollbar {
+    display: none;
+}
+
+.tutorial-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    line-height: 1;
+}
+
+.tutorial-close:hover {
+    background-color: #da190b;
+}
+
+#tutorialDescription {
+    color: white;
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+#tutorialDescription h3 {
+    color: #4CAF50;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+#tutorialDescription .tutorial-text {
+    white-space: pre-line;
+    margin: 15px 0;
 }
